@@ -1,0 +1,8 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  background-color: #2ca0ff;
+  box-sizing: border-box;
+  transition: all 0.5s ease-in;
+}
