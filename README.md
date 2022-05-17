@@ -1,9 +1,6 @@
-# Trello Clone
+# Vtask
 
-This is the official Repo from the Youtube Series "Let's Create a Trello Clone"
+This is the Course project for Uzhnu
 
-You can find the tutorial here: https://youtu.be/RDQGPs7StNA
+Its the official Repo from the Vezhdel Vasyl
 
-You can test a live version of the application here: https://selfdevtv.github.io/trello-clone/#/
-
-Discord: https://discord.gg/TN7X2uG
