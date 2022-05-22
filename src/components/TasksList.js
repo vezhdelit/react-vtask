@@ -1,56 +1,13 @@
 import React, { useState } from "react";
-import TrelloCard from "./TrelloCard";
-import TrelloCreate from "./TrelloCreate";
+import TaskCard from "./TaskCard";
+import CreateNewComponent from "./CreateNewComponent";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { editTitle, deleteList } from "../actions";
 import Icon from "@material-ui/core/Icon";
 
-const ListContainer = styled.div`
-  background-color: #dfe3e6;
-  border-radius: 3px;
-  width: 300px;
-  padding: 8px;
-  height: 100%;
-  margin: 0 8px 0 0;
-`;
-
-const StyledInput = styled.input`
-  width: 100%;
-  border: none;
-  outline-color: blue;
-  border-radius: 3px;
-  margin-bottom: 3px;
-  padding: 5px;
-`;
-
-const TitleContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-`;
-
-const DeleteButton = styled(Icon)`
-  cursor: pointer;
-  transition: opacity 0.3s ease-in-out;
-  opacity: 0.4;
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
-const ListTitle = styled.h4`
-  transition: background 0.3s ease-in;
-  ${TitleContainer}:hover & {
-    background: #ccc;
-  }
-`;
-
-const TrelloList = ({ title, cards, listID, index, dispatch }) => {
+const TasksList = ({ title, cards, listID, index, dispatch }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [listTitle, setListTitle] = useState(title);
 
@@ -112,7 +69,7 @@ const TrelloList = ({ title, cards, listID, index, dispatch }) => {
                 </div>
                 <div {...provided.droppableProps} ref={provided.innerRef}>
                   {cards.map((card, index) => (
-                    <TrelloCard
+                    <TaskCard
                       key={card.id}
                       text={card.text}
                       id={card.id}
@@ -121,7 +78,7 @@ const TrelloList = ({ title, cards, listID, index, dispatch }) => {
                     />
                   ))}
                   {provided.placeholder}
-                  <TrelloCreate listID={listID} />
+                  <CreateNewComponent listID={listID} />
                 </div>
               </div>
             )}
@@ -132,4 +89,50 @@ const TrelloList = ({ title, cards, listID, index, dispatch }) => {
   );
 };
 
-export default connect()(TrelloList);
+export default connect()(TasksList);
+
+
+
+
+const ListContainer = styled.div`
+  background-color: #dfe3e6;
+  border-radius: 3px;
+  width: 300px;
+  padding: 8px;
+  height: 100%;
+  margin: 0 8px 0 0;
+`;
+
+const StyledInput = styled.input`
+  width: 100%;
+  border: none;
+  outline-color: blue;
+  border-radius: 3px;
+  margin-bottom: 3px;
+  padding: 5px;
+`;
+
+const TitleContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+`;
+
+const DeleteButton = styled(Icon)`
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0.4;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+const ListTitle = styled.h4`
+  transition: background 0.3s ease-in;
+  ${TitleContainer}:hover & {
+    background: #ccc;
+  }
+`;

@@ -1,20 +1,14 @@
 import React, { PureComponent } from "react";
-import TrelloList from "./TrelloList";
+import TasksList from "./TasksList";
 import { connect } from "react-redux";
-import TrelloCreate from "./TrelloCreate";
+import CreateNewComponent from "./CreateNewComponent";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { sort, setActiveBoard } from "../actions";
 import { Link } from "react-router-dom";
 
-const ListsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
 
-// TODO: Fix performance issue
-
-class TrelloBoard extends PureComponent {
+class Board extends PureComponent {
   componentDidMount() {
     // set active trello board here
     const { boardID } = this.props.match.params;
@@ -52,7 +46,7 @@ class TrelloBoard extends PureComponent {
 
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <Link to="/">Go Back</Link>
+        <StyledLink to="/">Назад</StyledLink>
         <h2>{board.title}</h2>
         <Droppable droppableId="all-lists" direction="horizontal" type="list">
           {provided => (
@@ -60,13 +54,14 @@ class TrelloBoard extends PureComponent {
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
+              {/* eslint-disable-next-line array-callback-return */}
               {listOrder.map((listID, index) => {
                 const list = lists[listID];
                 if (list) {
                   const listCards = list.cards.map(cardID => cards[cardID]);
 
                   return (
-                    <TrelloList
+                    <TasksList
                       listID={list.id}
                       key={list.id}
                       title={list.title}
@@ -77,7 +72,7 @@ class TrelloBoard extends PureComponent {
                 }
               })}
               {provided.placeholder}
-              <TrelloCreate list />
+              <CreateNewComponent list />
             </ListsContainer>
           )}
         </Droppable>
@@ -92,4 +87,28 @@ const mapStateToProps = state => ({
   boards: state.boards
 });
 
-export default connect(mapStateToProps)(TrelloBoard);
+export default connect(mapStateToProps)(Board);
+
+
+
+const ListsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const StyledLink = styled(Link)`
+  && {
+    text-decoration: none;
+    color: black;
+    background: white;
+    height: 30px;
+    width: 60px;
+    padding: 10px;
+    margin: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+`;

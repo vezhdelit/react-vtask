@@ -2,7 +2,7 @@ import { CONSTANTS } from "../actions";
 
 const initialState = {
   "card-0": {
-    text: "Initial card",
+    text: "Моя замітка",
     id: `card-0`,
     list: "list-0"
   }
