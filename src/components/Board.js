@@ -47,7 +47,7 @@ class Board extends PureComponent {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <StyledLink to="/">Назад</StyledLink>
-        <h2>{board.title}</h2>
+        <h2>Дошка: {board.title}</h2>
         <Droppable droppableId="all-lists" direction="horizontal" type="list">
           {provided => (
             <ListsContainer
@@ -104,7 +104,7 @@ const StyledLink = styled(Link)`
     height: 30px;
     width: 60px;
     padding: 10px;
-    margin: 8px;
+    margin: -52px 8px 8px 8px;
     display: flex;
     justify-content: center;
     align-items: center;
