@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addBoard } from "../actions";
+import Button from "@material-ui/core/Button";
 
 const BoardThumbnail = ({ title }) => {
   console.log(title);
@@ -25,6 +26,13 @@ const Home = ({ boards, boardOrder, dispatch }) => {
     e.preventDefault();
     dispatch(addBoard(newBoardTitle));
   };
+
+  const handleDeleteBoards = e => {
+    e.preventDefault();
+    localStorage.clear();
+    window.location.reload();
+  };
+
 
   const renderBoards = () => {
     return boardOrder.map(boardID => {
@@ -57,10 +65,13 @@ const Home = ({ boards, boardOrder, dispatch }) => {
   };
 
   return (
-    <HomeContainer>
-      <Thumbnails>{renderBoards()}</Thumbnails>
-      {renderCreateBoard()}
-    </HomeContainer>
+      <div>
+        <StyledButton onClick={handleDeleteBoards}>Видалити всі дошки</StyledButton>
+        <HomeContainer>
+          <Thumbnails>{renderBoards()}</Thumbnails>
+          {renderCreateBoard()}
+        </HomeContainer>
+      </div>
   );
 };
 
@@ -127,4 +138,12 @@ const CreateInput = styled.input`
   outline-color: blue;
   box-shadow: 0 2px 4px grey;
   align-self: center;
+`;
+
+const StyledButton = styled(Button)`
+  && {
+    margin-top: -100px;
+    color: black;
+    background: #ffffff;
+  }
 `;
