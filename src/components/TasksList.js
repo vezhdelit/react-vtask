@@ -101,6 +101,7 @@ const ListContainer = styled.div`
   padding: 8px;
   height: 100%;
   margin: 0 8px 0 0;
+  box-shadow: 0 2px 4px rgb(140,140,140,0.5);
 `;
 
 const StyledInput = styled.input`
